@@ -21,3 +21,4 @@ def createpqrs(request):
 
 def editpqrs(request):
     return render(request, 'complaints/editar.html')
+

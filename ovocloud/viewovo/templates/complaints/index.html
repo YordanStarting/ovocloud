@@ -1,36 +1,49 @@
 {% extends "base.html" %}
 {% block title %}Nosotros{% endblock %}
 {% block container %}
-<div class="card">
-    <div class="card-header">
-      <button type="button" class="btn btn-success">Agregar Libro</button>
-    </div>
-    <ul class="list-group list-group-flush">
-      <table class="table">
-        <thead>
-          
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">TITULO</th>
-            <th scope="col">DESCRIPCÓN</th>
-            <th scope="col">IMAGEN</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        {% for Viewovo in complaints %}
-        <tbody>
-          <tr>
-            <th scope="row">{{ Viewovo.id }}</th>
-            <td>{{ Viewovo.tittle }}</td>
-            <td>{{ Viewovo.description }}</td>
-            <td>{{ Viewovo.image }}</td>
-            <td><a type="button" class="btn btn-success" href="{% url 'editpqrs' %}">Editar</a> <button type="button" class="btn btn-danger">Eliminar</button></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </ul>
-  </div>
+<div class="text-center mt-4">
+  <a href="nueva-pqr.html" class="btn btn-custom btn-lg px-4">PQRS</a>
+</div>
 
- 
+
+<main class="container mb-1 flex-grow-1">
+  <section class="card mb-4 shadow-sm">
+      <div class="card-body">
+          <h2 class="card-title h4"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Quejas Recientes</h2>
+          {% for Viewovo in complaints %}
+          <!-- PQR Item 1 -->
+          <div class="pqr-item card mb-3">
+              <div class="card-body">
+                  <h3 class="h5 text-primary">{{ Viewovo.tittle }}</h3>
+                  <p class="card-text">{{ Viewovo.description }}</p>
+                  <div class="pqr-meta d-flex flex-wrap gap-3 text-muted small">
+                      <span>Fecha: 15/03/2023</span>
+                      <span>Estado: <span class="estado proceso">En proceso</span></span>
+                      <span>Prioridad: Media</span>
+                      <span>ID: #QR-2023-015</span>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+
+          <nav aria-label="...">
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+          
+      </div>
+  </section>
+</main>
+
 {% endblock %}
