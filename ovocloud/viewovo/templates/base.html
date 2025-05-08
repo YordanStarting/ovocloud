@@ -28,8 +28,10 @@
                 Solicitudes
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Generar PQR</a></li>
-                <li><a class="dropdown-item" href="#">Descargar Certificados</a></li>
+                <li><a class="dropdown-item" href="{% url 'listar_monitoreos' %}">Formato Monitoreo pH</a></li>
+                <li><a class="dropdown-item" href="">Formato X</a></li>
+                <li><a class="dropdown-item" href="">Formato X</a></li>
+                <li><a class="dropdown-item" href="">Formato X</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="{% url 'nosotros' %}">Ver PQR</a></li>
               </ul>
@@ -43,15 +45,10 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'createpqrs' %}">Crear</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-            </li>
           </ul>
         </div>
       </div>
     </nav>
-    <p class="color" >HOLA MUNDO</p>
-
     <div class="container-fluid">
       {% block container %} {% endblock %}
     </div>

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'viewovo',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

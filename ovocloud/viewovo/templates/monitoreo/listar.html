@@ -1,0 +1,27 @@
+<h1>Monitoreos de Agua</h1>
+<a href="{% url 'crear_monitoreo' %}">Nuevo Monitoreo</a>
+<form method="get">
+  <label for="fecha">Filtrar por fecha:</label>
+  <input type="date" name="fecha" id="fecha" value="{{ fecha_filtro }}">
+  <button type="submit">Buscar</button>
+  <a href="{% url 'listar_monitoreos' %}">Limpiar</a>
+</form>
+<table>
+  <tr>
+    <th>Fecha</th>
+    <th>Sitio de Toma</th>
+    <th>Acciones</th>
+  </tr>
+  {% for m in monitoreos %}
+  <tr>
+    <td>{{ m.fecha }}</td>
+    <td>{{ m.sitio_toma }}</td>
+    <td>
+      <a href="{% url 'editar_monitoreo' m.pk %}">Editar</a>
+      <a href="{% url 'eliminar_monitoreo' m.pk %}">Eliminar</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+
