@@ -17,6 +17,7 @@ class Viewovo(models.Model):
         
         
 class MonitoreoAgua(models.Model):
+    lote = models.CharField(max_length=100, verbose_name="Lote")
     fecha = models.DateField(verbose_name="Fecha")
     sitio_toma = models.CharField(max_length=255, verbose_name="Sitio de Toma")
     ph = models.DecimalField(max_digits=3, decimal_places=1, verbose_name="pH (6.5 a 9.0)")

@@ -1,7 +1,9 @@
+from django.template.loader import get_template
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Viewovo, MonitoreoAgua
 from .froms import ovoform, MonitoreoAguaForm
+from xhtml2pdf import pisa
 # Create your views her
 
 def inicio(request):
@@ -38,17 +40,19 @@ def crear_monitoreo(request):
     return render(request, 'monitoreo/crear.html', {'form': form})
 
 # LISTAR
-def listar_monitoreos(request):
-    fecha_filtro = request.GET.get('fecha')  # Obtiene el valor del input "fecha" si se envía
 
-    if fecha_filtro:
-        monitoreos = MonitoreoAgua.objects.filter(fecha=fecha_filtro)
+
+def listar_monitoreos(request):
+    lote_filtro = request.GET.get('lote')  # <--- Nuevo filtro por lote
+
+    if lote_filtro:
+        monitoreos = MonitoreoAgua.objects.filter(lote__icontains=lote_filtro)
     else:
         monitoreos = MonitoreoAgua.objects.all()
 
     return render(request, 'monitoreo/listar.html', {
         'monitoreos': monitoreos,
-        'fecha_filtro': fecha_filtro  # Lo enviamos al template para mantener el valor seleccionado
+        'lote_filtro': lote_filtro,
     })
 
 # ACTUALIZAR
@@ -70,3 +74,21 @@ def eliminar_monitoreo(request, pk):
         monitoreo.delete()
         return redirect('listar_monitoreos')
     return render(request, 'monitoreo/eliminar.html', {'monitoreo': monitoreo})
+
+# Descargar Certificado
+def exportar_monitoreo_pdf(request):
+    monitoreos = MonitoreoAgua.objects.all()
+    template_path = 'monitoreo/pdf_monitoreos.html'
+    context = {'monitoreos': monitoreos}
+    
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="monitoreos.pdf"'
+
+    template = get_template(template_path)
+    html = template.render(context)
+
+    pisa_status = pisa.CreatePDF(html, dest=response)
+
+    if pisa_status.err:
+        return HttpResponse('Error al generar el PDF')
+    return response

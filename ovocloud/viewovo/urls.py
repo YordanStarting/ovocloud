@@ -17,4 +17,6 @@ urlpatterns = [
     path('nuevo/', views.crear_monitoreo, name='crear_monitoreo'),
     path('editar/<int:pk>/', views.editar_monitoreo, name='editar_monitoreo'),
     path('eliminar/<int:pk>/', views.eliminar_monitoreo, name='eliminar_monitoreo'),
+   path('exportar_pdf/', views.exportar_monitoreo_pdf, name='exportar_pdf'),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,27 +1,38 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}Nosotros{% endblock %}
+{% block container %}
 <h1>Monitoreos de Agua</h1>
-<a href="{% url 'crear_monitoreo' %}">Nuevo Monitoreo</a>
+<a href="{% url 'exportar_pdf' %}" class="btn btn-primary">Exportar a PDF</a>
+<a href="{% url 'crear_monitoreo' %}" class="btn btn-primary">Nuevo Monitoreo</a>
 <form method="get">
-  <label for="fecha">Filtrar por fecha:</label>
-  <input type="date" name="fecha" id="fecha" value="{{ fecha_filtro }}">
-  <button type="submit">Buscar</button>
+<section class="row"> 
+  <div class="col-md-4 py3"> 
+  <input type="text" name="lote" id="lote" value="{{ lote_filtro|add_class:"form-control" }}">
+   <button class="btn btn-primary" type="submit">Buscar</button>
+  </div>
   <a href="{% url 'listar_monitoreos' %}">Limpiar</a>
+</section>
+  
 </form>
-<table>
+<table class="table table-sm">
   <tr>
-    <th>Fecha</th>
-    <th>Sitio de Toma</th>
-    <th>Acciones</th>
+    <th scope="col">Lote</th>
+    <th scope="col">Fecha</th>
+    <th scope="col">Sitio de Toma</th>
+    <th scope="col">Acciones</th>
   </tr>
   {% for m in monitoreos %}
   <tr>
+    <td>{{ m.lote }}</td>
     <td>{{ m.fecha }}</td>
     <td>{{ m.sitio_toma }}</td>
     <td>
-      <a href="{% url 'editar_monitoreo' m.pk %}">Editar</a>
-      <a href="{% url 'eliminar_monitoreo' m.pk %}">Eliminar</a>
+      <a class="btn btn-primary" href="{% url 'editar_monitoreo' m.pk %}">Editar</a>
+      <a class="btn btn-danger" href="{% url 'eliminar_monitoreo' m.pk %}">Eliminar</a>
     </td>
   </tr>
   {% endfor %}
 </table>
 
-
+{% endblock %}

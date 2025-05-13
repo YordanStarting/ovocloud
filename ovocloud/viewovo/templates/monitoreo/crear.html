@@ -9,6 +9,10 @@
     <section class="col-md-12">
       <section class="row">
         <div class="col-md-4">
+            <label for="cloro_residual">Lote *</label>
+            {{ form.lote|add_class:"form-control" }}
+        </div>
+        <div class="col-md-4">
           <label for="sitio_toma">Sitio de Toma: *</label>
           {{ form.sitio_toma|add_class:"form-control" }}
         </div>
@@ -18,15 +22,16 @@
             {{ form.fecha|add_class:"form-control" }}
           </div>
         </div>
+        
+      </section>
+      <section class="row">
         <div class="col-md-4">
           <div class="form-group">
             <label for="ph">pH: *</label>
             {{ form.ph|add_class:"form-control" }}
           </div>
         </div>
-      </section>
-      <section class="row">
-        <div class="col-md-8">
+        <div class="col-md-4">
           <div class="form-group">
             <label for="cloro_residual">Cloro Residual (ppm): *</label>
             {{ form.cloro_residual|add_class:"form-control" }}
