@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Reporte</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #333; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h2>Reporte de Monitoreos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Sitio</th>
+                <th>pH</th>
+                <th>Cloro Residual</th>
+                <th>Dureza</th>
+                <th>Lote</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for m in monitoreos %}
+            <tr>
+                <td>{{ m.fecha }}</td>
+                <td>{{ m.sitio_toma }}</td>
+                <td>{{ m.ph }}</td>
+                <td>{{ m.cloro_residual }}</td>
+                <td>{{ m.dureza }}</td>
+                <td>{{ m.lote }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
