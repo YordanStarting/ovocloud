@@ -17,6 +17,9 @@ def nosotros(request):
 
 #vista de dashborad
 
+def login(request):
+    return render(request, 'directlinks/login.html')
+
 def dashboard(request):
     return render(request, 'dashboard/index.html')
 
