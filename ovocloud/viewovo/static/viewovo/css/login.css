@@ -275,10 +275,6 @@
     margin: 0;
     background: url(https://i.pinimg.com/originals/69/6a/84/696a84779ed18f7d905f7d8461bc7485.jpg)
       no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
   }
   #content {
     margin-top: 80px;
