@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'viewovo',
     'widget_tweaks',
+     # Herramientas de desarrollo adicionales
 ]
 
 MIDDLEWARE = [
@@ -120,6 +121,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+LOGIN_URL = '/login_view/'
 
 STATIC_URL = '/static/'
 

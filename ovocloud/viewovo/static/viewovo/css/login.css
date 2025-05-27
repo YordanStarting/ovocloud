@@ -273,7 +273,7 @@
   body {
     height: 100%;
     margin: 0;
-    background: url(https://i.pinimg.com/originals/69/6a/84/696a84779ed18f7d905f7d8461bc7485.jpg)
+    background: rgba(172, 228, 225, 0.596)
       no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;

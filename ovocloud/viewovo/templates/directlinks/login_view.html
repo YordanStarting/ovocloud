@@ -15,19 +15,26 @@
       <p>Un pequeño huevo para la gallina <a href="http://www.polymer-project.org/" target="_blank">Un gran salto para ovopacific</a></p>
     </div>
   </hgroup>
-  <form>
+  <form method="POST">
+    {% csrf_token %}
     <div class="group">
-      <input type="text"><span class="highlight"></span><span class="bar"></span>
-      <label>Nombre</label>
+      <input type="text" name="username" id="username" required><span class="highlight"></span><span class="bar"></span>
+      <label for="username">Usuario</label>
     </div>
     <div class="group">
-      <input type="email"><span class="highlight"></span><span class="bar"></span>
-      <label>Correo</label>
+      <input type="password" name="password" id="password" required><span class="highlight"></span><span class="bar"></span>
+      <label for="password">Contraseña</label>
     </div>
-    <button type="button" class="button buttonBlue">Iniciar Sesion
+    <button type="submit" class="button buttonBlue">Iniciar Sesion
       <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
     </button>
   </form>
+  {% for message in messages %}
+  <p>{{ message }}</p>
+  {% endfor %}
+  <footer>
+    <p>© 2023 OVOCloud. Todos los derechos reservados.</p>
+    <p>Desarrollado por <a href="https://github.com/ovopacific" target="_blank">OVOPacific</a></p>
 
 
 </body>

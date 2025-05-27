@@ -6,6 +6,9 @@ from .models import Viewovo, MonitoreoAgua
 from .froms import ovoform, MonitoreoAguaForm
 from xhtml2pdf import pisa
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 # Create your views her
 
 def inicio(request):
@@ -17,12 +20,27 @@ def nosotros(request):
 
 #vista de dashborad
 
-def login(request):
-    return render(request, 'directlinks/login.html')
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('admin_dashboard')
+        else:
+            messages.error(request, 'Usuario o contraseña incorrectos')
+    return render(request, 'directlinks/login_view.html')
 
+def logout_view(request):
+    logout(request)
+    return redirect('login_view')
+
+@login_required
 def dashboard(request):
     return render(request, 'dashboard/index.html')
 
+@login_required
 def formsshow(request):
     formularios = [
         {"nombre": "Monitoreo pH","area": "Calidad", "url": reverse('listar_monitoreos')},
