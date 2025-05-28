@@ -21,6 +21,7 @@ urlpatterns = [
     # # URL for the dashboard
     path('dashboard/', views.dashboard, name='admin_dashboard'),
     path('formsshow/', views.formsshow, name='formsshow'),
-    path('login/', views.login, name='login'),
+    path('login_view/', views.login_view, name='login_view'),
+    path('logout/', views.logout_view, name='logout'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
