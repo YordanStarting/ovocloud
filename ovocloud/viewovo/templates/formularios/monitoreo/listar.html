@@ -1,38 +1,56 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 {% load widget_tweaks %}
 {% block title %}Nosotros{% endblock %}
+  {% block buscador %}
+  <form method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+      <div class="input-group">
+        <input type="text" name="lote" id="lote" class="form-control 
+        bg-light border-0 small" placeholder="Buscar..." 
+        value="{{ lote_filtro|default_if_none:'' }}" aria-label="Search" aria-describedby="basic-addon2">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+        <a class="btn btn-danger" href="{% url 'listar_monitoreos' %}">Limpiar</a> 
+      </div>
+  </form>
+  {% endblock %}
 {% block container %}
-<h1>Monitoreos de Agua</h1>
-<a href="{% url 'exportar_pdf' %}" class="btn btn-primary">Exportar a PDF</a>
-<a href="{% url 'crear_monitoreo' %}" class="btn btn-primary">Nuevo Monitoreo</a>
-<form method="get">
-<section class="row"> 
-  <div class="col-md-4 py3"> 
-  <input type="text" name="lote" id="lote" value="{{ lote_filtro }}">
-   <button class="btn btn-primary" type="submit">Buscar</button>
-  </div>
-  <a href="{% url 'listar_monitoreos' %}">Limpiar</a>
-</section>
-  
-</form>
-<table class="table table-sm">
-  <tr>
-    <th scope="col">Lote</th>
-    <th scope="col">Fecha</th>
-    <th scope="col">Sitio de Toma</th>
-    <th scope="col">Acciones</th>
-  </tr>
-  {% for m in monitoreos %}
-  <tr>
-    <td>{{ m.lote }}</td>
-    <td>{{ m.fecha }}</td>
-    <td>{{ m.sitio_toma }}</td>
-    <td>
-      <a class="btn btn-primary" href="{% url 'editar_monitoreo' m.pk %}">Editar</a>
-      <a class="btn btn-danger" href="{% url 'eliminar_monitoreo' m.pk %}">Eliminar</a>
-    </td>
-  </tr>
-  {% endfor %}
-</table>
 
+
+
+<div class="container-md">
+    <h1 style="center">Monitoreos de Agua</h1>
+
+    <div class="card">
+      <div class="card-header">
+      <div class="input-group">
+        <a href="{% url 'crear_monitoreo' %}" class="btn btn-primary">Nuevo Monitoreo</a>  
+      </div> 
+
+      </div>
+      <div class="card-body">
+        <table class="table table-md">
+      <tr>
+        <th scope="col">LOTE</th>
+        <th scope="col">FECHAS</th>
+        <th scope="col">SITIOS DE TOMA</th>
+        <th scope="col">ACCIONES</th>
+      </tr>
+      {% for m in monitoreos %}
+      <tr>
+        <td>{{ m.lote }}</td>
+        <td>{{ m.fecha }}</td>
+        <td>{{ m.sitio_toma }}</td>
+        <td>
+          <a class="btn btn-primary" href="{% url 'editar_monitoreo' m.pk %}">Editar</a>
+          <a class="btn btn-danger" href="{% url 'eliminar_monitoreo' m.pk %}">Eliminar</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+      </div>
+      <div class="card-footer text-body-secondary">
+        2 days ago
+      </div>
+    </div>
+</div>
 {% endblock %}
+

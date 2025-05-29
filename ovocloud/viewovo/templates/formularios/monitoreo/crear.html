@@ -1,81 +1,89 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 {% load widget_tweaks %}
 {% block title %}Agregar PQRS {% endblock %}
 {% block container %}
 {% load static %}
-<h1>Formulario de Monitoreo</h1>
-<form method="post">
-  {% csrf_token %}
-    <section class="col-md-12">
-      <section class="row">
-        <div class="col-md-4">
-            <label for="cloro_residual">Lote *</label>
-            {{ form.lote|add_class:"form-control" }}
-        </div>
-        <div class="col-md-4">
-          <label for="sitio_toma">Sitio de Toma: *</label>
-          {{ form.sitio_toma|add_class:"form-control" }}
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <label for="fechaActual">Fecha Actual: *</label>
-            {{ form.fecha|add_class:"form-control" }}
-          </div>
-        </div>
-        
-      </section>
-      <section class="row">
-        <div class="col-md-4">
-          <div class="form-group">
-            <label for="ph">pH: *</label>
-            {{ form.ph|add_class:"form-control" }}
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <label for="cloro_residual">Cloro Residual (ppm): *</label>
-            {{ form.cloro_residual|add_class:"form-control" }}
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form_group">
-            <label for="dureza">Dureza (ppm): *</label>
-            {{ form.dureza|add_class:"form-control" }}
-          </div>
-        </div>
-      </section>
-      <section class="row">
-        <div class="col-md-4">
-          <label for="adicion_cloro">Adición Cloro: *</label>
-          {{ form.adicion_cloro|add_class:"form-control" }}
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <label for="vigencia_reactivos">Vigencia Reactivos: *</label>
-            {{ form.vigencia_reactivos|add_class:"form-control" }}
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <label for="id_Responsable">Responsable:</label>
-            {{ form.responsable|add_class:"form-control" }}
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="form-group">
-            <label for="id_observaciones">Observaciones</label>
-            {{ form.observaciones|add_class:"form-control" }}
-          </div>
-        </div>
-      </section>
-    </section>
-    
-  <br>
- 
-  <button type="submit" class="btn btn-primary">Enviar</button>
-  <a class="btn btn-danger" href="{% url 'listar_monitoreos' %}">Cancelar</a>
-  </form>
 
+<div class="container-md">
+  <div class="card">
+    <div class="card-header text-center">
+    <h1>Formulario de Monitoreo</h1>
+    </div>
+    <div class="card-body">
+    <form method="post">
+      {% csrf_token %}
+        <section class="col-md-12">
+          <section class="row">
+            <div class="col-md-4">
+                <label for="cloro_residual">Lote *</label>
+                {{ form.lote|add_class:"form-control" }}
+            </div>
+            <div class="col-md-4">
+              <label for="sitio_toma">Sitio de Tomas: *</label>
+              {{ form.sitio_toma|add_class:"form-control" }}
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="fechaActual">Fecha Actual: *</label>
+                {{ form.fecha|add_class:"form-control" }}
+              </div>
+            </div>
+            
+          </section>
+          <section class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="ph">pH: *</label>
+                {{ form.ph|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="cloro_residual">Cloro Residual (ppm): *</label>
+                {{ form.cloro_residual|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form_group">
+                <label for="dureza">Dureza (ppm): *</label>
+                {{ form.dureza|add_class:"form-control" }}
+              </div>
+            </div>
+          </section>
+          <section class="row">
+            <div class="col-md-4">
+              <label for="adicion_cloro">Adición Cloro: *</label>
+              {{ form.adicion_cloro|add_class:"form-control" }}
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="vigencia_reactivos">Vigencia Reactivos: *</label>
+                {{ form.vigencia_reactivos|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="id_Responsable">Responsable:</label>
+                {{ form.responsable|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="id_observaciones">Observaciones</label>
+                {{ form.observaciones|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="cold-md-4 px-3">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+            <a class="btn btn-danger" href="{% url 'listar_monitoreos' %}">Cancelar</a>
+            </div>
+          </section>
+        </section>
+      </form>
+    </div>
+    <!-- end cardbody -->
+    </div>
+</div>
 
   
   {% endblock %}

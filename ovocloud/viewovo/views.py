@@ -51,22 +51,23 @@ def formsshow(request):
     return render(request, 'directlinks/forms_show.html', {"formularios": formularios})
 
 # complaints views here 
-
+@login_required
 def complaints(request):
     complaints = Viewovo.objects.all()
     print(complaints)
     return render(request, 'formularios/complaints/index.html', {'complaints': complaints})
-
+@login_required
 def createpqrs(request):
     formulario = ovoform(request.POST or None)
     return render(request, 'formularios/complaints/crear.html', {'formulario': formulario})
-
+@login_required
 def editpqrs(request):
     return render(request, 'formularios/complaints/editar.html')
 
 # complaints aqua here 
 
 # CREAR
+@login_required
 def crear_monitoreo(request):
     if request.method == 'POST':
         form = MonitoreoAguaForm(request.POST)
@@ -79,7 +80,7 @@ def crear_monitoreo(request):
 
 # LISTAR
 
-
+@login_required
 def listar_monitoreos(request):
     lote_filtro = request.GET.get('lote')  # <--- Nuevo filtro por lote
 
@@ -94,6 +95,7 @@ def listar_monitoreos(request):
     })
 
 # ACTUALIZAR
+@login_required
 def editar_monitoreo(request, pk):
     monitoreo = get_object_or_404(MonitoreoAgua, pk=pk)
     if request.method == 'POST':
@@ -106,6 +108,7 @@ def editar_monitoreo(request, pk):
     return render(request, 'formularios/monitoreo/editar.html', {'form': form})
 
 # ELIMINAR
+@login_required
 def eliminar_monitoreo(request, pk):
     monitoreo = get_object_or_404(MonitoreoAgua, pk=pk)
     if request.method == 'POST':
