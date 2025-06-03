@@ -230,6 +230,11 @@
     }
   }
   
+  .home {
+    background-position: center top;
+	  background-size: cover;
+  }
+
   .logo {
     text-align: center;
   }
@@ -273,7 +278,7 @@
   body {
     height: 100%;
     margin: 0;
-    background: rgba(172, 228, 225, 0.596)
+    background: rgba(255, 255, 255, 0.842)
       no-repeat center center fixed;
   }
   #content {
@@ -285,13 +290,29 @@
     line-height: 40px;
     letter-spacing: 2px;
   }
+
+  .text-color {
+    text-align: left;
+    color: #fffcfc !important;
+  }
+
+  .navbar-colored {
+  background-color: rgba(255, 255, 255, 0.95); /* Puedes usar cualquier color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Opcional: una sombra sutil */
+}
+
+  .navbar-transparent {
+  background-color: transparent !important;
+  transition: background-color 0.3s ease !important;
+}
   
   .nav-link {
+    color: #fffcfc !important;
     border-top: 4px solid white;
   
     transition: border-top 0.3s;
     &:hover {
-      border-top: 4px solid dodgerblue;
+      border-top: 4px solid rgba(30, 143, 255, 0.836);
     }
   }
   
@@ -393,3 +414,6 @@
     box-shadow: 0 8px 6px -6px black;
   }
   
+  .navbarcolor {
+    background-color: #0856e7 !important;
+  }

@@ -3,7 +3,9 @@
 {% block title %}Agregar PQRS {% endblock %}
 {% block container %}
 {% load static %}
-<h1>Formulario de Monitoreo</h1>
+<!--Begin Container-->
+<div class="container-md">
+<h1 class="mx-3 py-3">Formulario de Monitoreo</h1>
 <form method="post">
   {% csrf_token %}
     <section class="col-md-12">
@@ -22,8 +24,8 @@
             {{ form.fecha|add_class:"form-control" }}
           </div>
         </div>
-        
-      </section>
+     </section>
+
       <section class="row">
         <div class="col-md-4">
           <div class="form-group">
@@ -69,13 +71,12 @@
         </div>
       </section>
     </section>
-    
-  <br>
- 
-  <button type="submit" class="btn btn-primary">Enviar</button>
-  <a class="btn btn-danger" href="{% url 'listar_monitoreos' %}">Cancelar</a>
+          <div class="mx-3 py-3"> 
+          <button type="submit" class="btn btn-primary">Enviar</button>
+          <a class="btn btn-danger" href="{% url 'listar_monitoreos' %}">Cancelar</a>
+          </div>
   </form>
-
-
+</div>
+<!-- End container-md -->
   
   {% endblock %}

@@ -2,15 +2,16 @@
 <html lang="en">
     {% load static %}
 <head>
+  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     
 </head>
+
 <body>
   <hgroup>
-    
     <div class="logo"><a href="http://www.polymer-project.org/" target="_blank"><img class="logo" src="{% static 'img/OvoCloud.png' %}"></a>
       <p>Un pequeño huevo para la gallina <a href="http://www.polymer-project.org/" target="_blank">Un gran salto para ovopacific</a></p>
     </div>
@@ -32,9 +33,6 @@
   {% for message in messages %}
   <p>{{ message }}</p>
   {% endfor %}
-  <footer>
-    <p>© 2023 OVOCloud. Todos los derechos reservados.</p>
-    <p>Desarrollado por <a href="https://github.com/ovopacific" target="_blank">OVOPacific</a></p>
 
 
 </body>
