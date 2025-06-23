@@ -1,0 +1,167 @@
+{% extends "base2.html" %}
+{% load widget_tweaks %}
+{% block title %} Agregar PQRS {% endblock %}
+{% block container %}
+{% load static %}
+
+<div class="container-md">
+  <div class="card">
+    <div class="card-header text-center">
+    <h1>Formulario de Registros Viajes</h1>
+    </div>
+    <div class="card-body">
+    <form method="post">
+      {% csrf_token %}
+        <section class="col-md-12">
+          <section class="row">
+            <div class="col-md-4">
+              <label for="sitio_toma">Fecha Actual: *</label>
+              {{ form.fecha|add_class:"form-control" }}
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="fechaActual">Dia: *</label>
+                {{ form.dia|add_class:"form-control" }}
+              </div>
+            </div>   
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="ph">Placa: *</label>
+                {{ form.placa|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="cloro_residual">Conductor: *</label>
+                {{ form.conductor|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form_group">
+                <label for="dureza">Ruta: *</label>
+                {{ form.ruta|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="adicion_cloro">MP/PT: *</label>
+              {{ form.mp_pt|add_class:"form-control" }}
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="vigencia_reactivos">Kilos: *</label>
+                {{ form.kilos|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="id_km_inicial">Kilometros Inicial:</label>
+                {{ form.km_inicial|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="id_km_final">Kilometros Final:</label>
+                {{ form.km_final|add_class:"form-control" }}
+              </div>
+            </div>
+             <div class="col-md-4">
+              <div class="form-group">
+                <label for="id_km">Km:</label>
+                {{ form.km_final|add_class:"form-control" }}
+              </div>
+            </div>
+             <div class="col-md-4">
+              <div class="form-group">
+                <label for="id_observaciones">GAL ACPM:</label>
+                {{ form.gal_acpm|add_class:"form-control" }}
+              </div>
+            </div>
+             <div class="col-md-4">
+              <div class="form-group">
+                <label for="id_observaciones">$ ACPM:</label>
+                {{ form.valor_acpm|add_class:"form-control" }}
+              </div>
+            </div>
+              <div class="col-md-4">
+              <div class="form-group">
+                <label for="cant_peajes">Cantidad Peajes:</label>
+                {{ form.valor_peajes|add_class:"form-control" }}
+              </div>
+            </div>
+              <div class="col-md-4">
+              <div class="form-group">
+                <label for="valor_peajes">Valor Peajes</label>
+                {{ form.valor_peajes|add_class:"form-control" }}
+              </div>
+            </div>
+              <div class="col-md-4">
+              <div class="form-group">
+                <label for="viaticos">Viaticos:</label>
+                {{ form.viaticos|add_class:"form-control" }}
+              </div>
+            </div>
+              <div class="col-md-4">
+              <div class="form-group">
+                <label for="id_observaciones">Otros</label>
+                {{ form.otros|add_class:"form-control" }}
+              </div>
+            </div>
+              <div class="col-md-4">
+              <div class="form-group">
+                <label for="id_observaciones">Vr/Kg:</label>
+                {{ form.valor_kg|add_class:"form-control" }}
+              </div>
+            </div>
+              <div class="col-md-4">
+              <div class="form-group">
+                <label for="id_observaciones">Consignación:</label>
+                {{ form.consignacion|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="id_observaciones">Pago Consiliado con Tesoreria:</label>
+                {{ form.pago_con_tesoreria |add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="cold-md-4 px-3">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+            <a class="btn btn-danger" href="{% url 'listar_viaje' %}">Cancelar</a>
+            </div>
+          </section>
+        </section>
+      </form>
+    </div>
+    <!-- end cardbody -->
+    </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const kmInicial = document.getElementById("id_km_inicial");
+    const kmFinal = document.getElementById("id_km_final");
+    const km = document.getElementById("id_km");
+
+    // Asegura que sea solo lectura
+    if (km) {
+      km.readOnly = true;
+    }
+
+    function calcularKM() {
+      const inicial = parseFloat(kmInicial.value) || 0;
+      const final = parseFloat(kmFinal.value) || 0;
+      const resultado = final - inicial;
+
+      if (!isNaN(resultado)) {
+        km.value = resultado.toFixed(3);
+      }
+    }
+
+    // Escucha cambios en los campos
+    kmInicial.addEventListener("input", calcularKM);
+    kmFinal.addEventListener("input", calcularKM);
+  });
+</script>
+
+  
+  {% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base2.html" %}
+{% load widget_tweaks %}
+{% block title %}Nosotros{% endblock %}
+{% block buscador %}
+  <form method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+      <div class="input-group">
+        <input type="date" name="fecha" id="fecha" class="form-control 
+        bg-light border-0 small" placeholder="Buscar..." 
+        value="{{ fecha_filtro|default_if_none:'' }}" aria-label="Search" aria-describedby="basic-addon2">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+        <a class="btn btn-danger" href="{% url 'listar_viaje' %}">Limpiar</a> 
+      </div>
+  </form>
+  {% endblock %}
+{% block container %}
+
+
+
+<div class="container-md">
+    <h1 style="text-align:center;">Registros De Viajes</h1>
+    <div class="card">
+      <div class="card-header">
+      <div class="input-group">
+        <a href="{% url 'crear_viaje' %}" class="btn btn-primary">Nuevo Registro</a>  
+      </div> 
+
+      </div>
+      <div class="card-body">
+        <table class="table table-md">
+      <tr>
+        <th scope="col">FECHAS</th>
+        <th scope="col">PLACAS</th>
+        <th scope="col">CONDUCTOR</th>
+        <th scope="col">ACCIONES</th>
+      </tr>
+      {% for r in registro %}
+      <tr>
+        <td><a href="{% url 'editar_viaje' r.pk %}">{{ r.fecha }}</a></td>
+        <td>{{ r.placa }}</td>
+        <td>{{ r.conductor }}</td>
+        <td>
+          <a href="{% url 'eliminar_viaje' r.pk %}">ELIMINAR</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+      </div>
+      <div class="card-footer text-body-secondary">
+        2 days ago
+      </div>
+    </div>
+</div>
+{% endblock %}
+
