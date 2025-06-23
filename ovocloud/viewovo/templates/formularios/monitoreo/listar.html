@@ -17,8 +17,7 @@
 
 
 <div class="container-md">
-    <h1 style="center">Monitoreos de Agua</h1>
-
+    <h1 style="text-align:center;">Monitoreos de Agua</h1>
     <div class="card">
       <div class="card-header">
       <div class="input-group">
@@ -29,14 +28,12 @@
       <div class="card-body">
         <table class="table table-md">
       <tr>
-        <th scope="col">LOTE</th>
         <th scope="col">FECHAS</th>
         <th scope="col">SITIOS DE TOMA</th>
         <th scope="col">ACCIONES</th>
       </tr>
       {% for m in monitoreos %}
       <tr>
-        <td>{{ m.lote }}</td>
         <td>{{ m.fecha }}</td>
         <td>{{ m.sitio_toma }}</td>
         <td>

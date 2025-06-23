@@ -2,8 +2,8 @@ from django.template.loader import get_template
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
-from .models import Viewovo, MonitoreoAgua
-from .froms import ovoform, MonitoreoAguaForm
+from .models import Viewovo, MonitoreoAgua, RegistroViaje
+from .froms import ovoform, MonitoreoAguaForm, registroViajeForm
 from xhtml2pdf import pisa
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
@@ -45,7 +45,7 @@ def formsshow(request):
     formularios = [
         {"nombre": "Monitoreo pH","area": "Calidad", "url": reverse('listar_monitoreos')},
         {"nombre": "Editar PQR","area": "Calidad", "url": reverse('editpqrs')},
-        {"nombre": "Formulario 3","area": "Calidad", "url": reverse('listar_monitoreos')},
+        {"nombre": "Registro Viajes","area": "Logistica", "url": reverse('listar_viaje')},
         # Agrega más dinámicamente si quieres
     ]
     return render(request, 'directlinks/forms_show.html', {"formularios": formularios})
@@ -66,6 +66,7 @@ def editpqrs(request):
 
 # complaints aqua here 
 
+#####################################CRUD Monitoreo Agua#################################
 # CREAR
 @login_required
 def crear_monitoreo(request):
@@ -77,23 +78,20 @@ def crear_monitoreo(request):
     else:
         form = MonitoreoAguaForm()
     return render(request, 'formularios/monitoreo/crear.html', {'form': form})
-
 # LISTAR
-
 @login_required
 def listar_monitoreos(request):
-    lote_filtro = request.GET.get('lote')  # <--- Nuevo filtro por lote
+    fecha_filtro = request.GET.get('fecha')  # <--- Nuevo filtro por lote
 
-    if lote_filtro:
-        monitoreos = MonitoreoAgua.objects.filter(lote__icontains=lote_filtro)
+    if fecha_filtro:
+        monitoreos = MonitoreoAgua.objects.filter(fecha=fecha_filtro)
     else:
         monitoreos = MonitoreoAgua.objects.all()
 
     return render(request, 'formularios/monitoreo/listar.html', {
         'monitoreos': monitoreos,
-        'lote_filtro': lote_filtro,
+        'fecha_filtro': fecha_filtro,
     })
-
 # ACTUALIZAR
 @login_required
 def editar_monitoreo(request, pk):
@@ -106,7 +104,6 @@ def editar_monitoreo(request, pk):
     else:
         form = MonitoreoAguaForm(instance=monitoreo)
     return render(request, 'formularios/monitoreo/editar.html', {'form': form})
-
 # ELIMINAR
 @login_required
 def eliminar_monitoreo(request, pk):
@@ -118,22 +115,68 @@ def eliminar_monitoreo(request, pk):
 
 # Descargar Certificado
 def exportar_monitoreo_pdf(request):
-    monitoreos = MonitoreoAgua.objects.all()
-    template_path = 'formularios/monitoreo/pdf_monitoreos.html'
-    context = {'monitoreos': monitoreos}
-    
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="monitoreos.pdf"'
+        monitoreos = MonitoreoAgua.objects.all()
+        template_path = 'formularios/monitoreo/pdf_monitoreos.html'
+        context = {'monitoreos': monitoreos}
+        
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="monitoreos.pdf"'
 
-    template = get_template(template_path)
-    html = template.render(context)
+        template = get_template(template_path)
+        html = template.render(context)
 
-    pisa_status = pisa.CreatePDF(html, dest=response)
+        pisa_status = pisa.CreatePDF(html, dest=response)
 
-    if pisa_status.err:
-        return HttpResponse('Error al generar el PDF')
-    return response
+        if pisa_status.err:
+            return HttpResponse('Error al generar el PDF')
+        return response
 
 
-#listar Formularios 
+
+#####################################CRUD RegistroViaje#################################
+# CREAR
+@login_required
+def crear_registroviaje(request):
+    if request.method == 'POST':
+        form = registroViajeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_viaje')
+    else:
+        form = registroViajeForm()
+    return render(request, 'formularios/registroviaje/crear.html', {'form': form})
+# LISTAR
+@login_required
+def listar_registroviaje(request):
+    fecha_filtro = request.GET.get('fecha')  # <--- Nuevo filtro por lote
+
+    if fecha_filtro:
+        registro = RegistroViaje.objects.filter(fecha=fecha_filtro)
+    else:
+        registro = RegistroViaje.objects.all()
+
+    return render(request, 'formularios/registroviaje/listar.html', {
+        'registro': registro,
+        'conductor_filtro': fecha_filtro,
+    })
+# ACTUALIZAR
+@login_required
+def editar_registroviaje(request, pk):
+    registro = get_object_or_404(RegistroViaje, pk=pk)
+    if request.method == 'POST':
+        form = registroViajeForm(request.POST, instance=registro)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_viaje')
+    else:
+        form = registroViajeForm(instance=registro)
+    return render(request, 'formularios/registroviaje/editar.html', {'form': form})
+# ELIMINAR
+@login_required
+def eliminar_registroviaje(request, pk):
+    registro = get_object_or_404(RegistroViaje, pk=pk)
+    if request.method == 'POST':
+        registro.delete()
+        return redirect('listar_viaje')
+    return render(request, 'formularios/registroviaje/eliminar.html', {'registro': registro})
 

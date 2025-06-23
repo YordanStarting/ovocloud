@@ -23,5 +23,10 @@ urlpatterns = [
     path('formsshow/', views.formsshow, name='formsshow'),
     path('login_view/', views.login_view, name='login_view'),
     path('logout/', views.logout_view, name='logout'),
+    # # URL for the viajes
+    path('viajes/', views.listar_registroviaje, name='listar_viaje'),
+    path('viajes/nuevo/', views.crear_registroviaje, name='crear_viaje'),
+    path('viajes/editar/<int:pk>/', views.editar_registroviaje, name='editar_viaje'),
+    path('viajes/eliminar/<int:pk>/', views.eliminar_registroviaje, name='eliminar_viaje'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
